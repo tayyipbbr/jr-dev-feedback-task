@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management # management plugin'i ile gelir
+    container_name: my_rabbitmq
+    ports:
+      - "5672:5672"  # AMQP portu
+      - "15672:15672" # Yönetim arayüzü portu
+    volumes: # Verilerin kalıcı olması için (opsiyonel ama önerilir)
+      - rabbitmq_data:/var/lib/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest # Varsayılan kullanıcı adı
+      - RABBITMQ_DEFAULT_PASS=guest # Varsayılan şifre
+    networks: # Servislerin birbirini bulması için aynı network'te olmalı
+      - feedback_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: my_mongodb
+    ports:
+      - "27017:27017"
+    volumes: # Verilerin kalıcı olması için
+      - mongodb_data:/data/db
+    # environment: # Gerekirse kullanıcı adı/şifre eklenebilir
+    #   - MONGO_INITDB_ROOT_USERNAME=admin
+    #   - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - feedback_network
+
+volumes: # Docker'ın yönettiği isimlendirilmiş volume'ler
+  rabbitmq_data:
+  mongodb_data:
+
+networks: # Ortak bir network tanımla
+  feedback_network:
+    driver: bridge
