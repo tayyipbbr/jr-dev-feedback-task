@@ -28,10 +28,19 @@ ASP.NET Core Worker Service: RabbitMQ'daki kuyruğu dinler, yeni bir mesaj geldi
 
 MongoDB: Alınan geri bildirimleri kalıcı olarak saklar.
 
+-------------------------------------------------------------
+
+Neleri Geliştirebilirdim?
+
+-proxy/reverse proxy #
+-middleware çalışmasının detaylandırılması #
+-Detaylı UI #
+-Çoklu rabbitmq işlev testi #
+
+-------------------------------------------------------------
+
 Kurulum ve Çalıştırma Adımları
 Bu projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
-
--------------------------------------------------
 
 1. Ön Gereksinimler
 Makinenizde aşağıdaki araçların kurulu olduğundan emin olun:
