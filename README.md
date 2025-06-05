@@ -31,6 +31,8 @@ MongoDB: Alınan geri bildirimleri kalıcı olarak saklar.
 Kurulum ve Çalıştırma Adımları
 Bu projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
 
+-------------------------------------------------
+
 1. Ön Gereksinimler
 Makinenizde aşağıdaki araçların kurulu olduğundan emin olun:
 
@@ -58,6 +60,8 @@ Bu komut, servisleri arka planda başlatacaktır.
 RabbitMQ Yönetim Arayüzü: http://localhost:15672 (Kullanıcı: guest, Şifre: guest)
 
 MongoDB Bağlantısı: mongodb://localhost:27017
+
+-----------------------------------------------------------
 
 4. Backend Kurulumu ve Çalıştırılması (API ve Worker Service)
 API Projesi (FeedbackApp.Api):
@@ -91,6 +95,8 @@ Worker Service'i çalıştırın:
 
 dotnet run
 
+------------------------------------------------------------------------------
+
 5. Frontend Kurulumu ve Çalıştırılması (feedback-frontend)
 Frontend projesinin klasörüne gidin:
 
@@ -117,6 +123,8 @@ Frontend geliştirme sunucusunu başlatın:
 npm run dev
 
 Uygulama genellikle http://localhost:5173 adresinde açılacaktır.
+
+----------------------------------------------------
 
 6. .NET Uygulamaları ve Docker
 Bu projenin mevcut yapılandırmasında:
