@@ -1,15 +1,14 @@
 ﻿using MassTransit;
-using FeedbackApp.Application.Contracts; // FeedbackReceived mesaj kontratı için
-using FeedbackApp.WorkerService.Models; // FeedbackDocument için
+using FeedbackApp.Application.Contracts;
+using FeedbackApp.WorkerService.Models; 
 using Microsoft.Extensions.Logging;
-using MongoDB.Driver; // MongoDB Driver için
+using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options; // IOptions için
+using Microsoft.Extensions.Options;
 
 namespace FeedbackApp.WorkerService.Consumers
 {
-    // MongoDB ayarlarını tutacak sınıf
     public class MongoDbSettings
     {
         public string ConnectionString { get; set; } = string.Empty;
@@ -31,7 +30,7 @@ namespace FeedbackApp.WorkerService.Consumers
                 string.IsNullOrEmpty(settings.CollectionName))
             {
                 _logger.LogError("MongoDB settings are not configured properly.");
-                // Gerçek uygulamada burada daha robust bir hata yönetimi veya başlatma hatası fırlatılabilir.
+                // TODO: detaylı catch throw yapılacak / veya mw
                 throw new InvalidOperationException("MongoDB settings are not configured properly.");
             }
 
@@ -52,8 +51,8 @@ namespace FeedbackApp.WorkerService.Consumers
                 Name = message.Name,
                 Email = message.Email,
                 Message = message.Message,
-                ReceivedAt = message.Timestamp, // Mesajın API tarafından alındığı zaman
-                ProcessedAt = DateTime.UtcNow   // Mesajın consumer tarafından işlendiği zaman
+                ReceivedAt = message.Timestamp,
+                ProcessedAt = DateTime.UtcNow
             };
 
             try
@@ -64,9 +63,8 @@ namespace FeedbackApp.WorkerService.Consumers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error saving feedback to MongoDB. Message: {@FeedbackMessage}", message);
-                // Burada mesajı bir error kuyruğuna gönderme veya retry mekanizması düşünülebilir.
-                // MassTransit'in kendi retry ve error handling mekanizmaları da konfigüre edilebilir.
-                throw; // Hatanın MassTransit tarafından yönetilmesi için tekrar fırlat
+                // masstransitin kendi handlingi var , eklenecek
+                throw;
             }
         }
     }

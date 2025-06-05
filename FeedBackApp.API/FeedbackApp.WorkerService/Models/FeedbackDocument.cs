@@ -5,8 +5,8 @@ namespace FeedbackApp.WorkerService.Models
 {
     public class FeedbackDocument
     {
-        [BsonId] // MongoDB _id alanı için
-        [BsonRepresentation(BsonType.ObjectId)] // Otomatik ObjectId oluşturulması için
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
         [BsonElement("Name")]
@@ -19,11 +19,11 @@ namespace FeedbackApp.WorkerService.Models
         public string? Message { get; set; }
 
         [BsonElement("ReceivedAt")]
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)] // Tarihin UTC olarak saklanması
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)] 
         public DateTime ReceivedAt { get; set; }
 
         [BsonElement("ProcessedAt")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime ProcessedAt { get; set; } // Mesajın işlendiği zaman
+        public DateTime ProcessedAt { get; set; }
     }
 }

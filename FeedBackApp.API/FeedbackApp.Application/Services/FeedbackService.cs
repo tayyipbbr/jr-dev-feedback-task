@@ -30,7 +30,7 @@ namespace FeedbackApp.Application.Services
 
                 return;
             }
-
+            // TODO: detaylı catch eklenecek / veya middleweare
             try
             {
                 _logger.LogInformation("Geri bildirim işleniyor (MassTransit ile): {@FeedbackDto}", feedbackDto);

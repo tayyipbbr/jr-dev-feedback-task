@@ -15,12 +15,10 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
-                // appsettings.json'dan MongoDB ayarlarýný okuyup MongoDbSettings sýnýfýna bind et
                 services.Configure<MongoDbSettings>(hostContext.Configuration.GetSection("MongoDb"));
 
                 services.AddMassTransit(x =>
                 {
-                    // Consumer'ý DI container'a ve MassTransit'e kaydet
                     x.AddConsumer<FeedbackConsumer>();
 
                     x.UsingRabbitMq((context, cfg) =>
@@ -37,15 +35,13 @@ public class Program
                             h.Password(password);
                         });
 
-                        // Consumer için endpoint'i (kuyruðu) doðrudan isimlendirerek konfigüre et.
-                        // RabbitMQ'da oluþan kuyruk adý bu olacak.
-                        // Eðer mevcut kuyruk adýnýz "feedback" ise ve bunu korumak istiyorsanýz, "feedback-queue" yerine "feedback" yazýn.
+                        // rabbitmq kuyruk adý
                         cfg.ReceiveEndpoint("feedback-queue", e =>
                         {
                             e.ConfigureConsumer<FeedbackConsumer>(context);
 
-                            // Hata yönetimi için basit bir retry politikasý (opsiyonel)
-                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5))); // 3 kez, 5 saniye aralýklarla
+                            // 3 kez, 5 saniye aralýklarla TODO: hata durumund ekstra kontrol bakýlacak ???
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5))); 
                         });
                     });
                 });

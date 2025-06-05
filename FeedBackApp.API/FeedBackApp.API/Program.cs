@@ -5,28 +5,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMassTransit(x =>
 {
-    // Ýleride consumer'larýnýz API projesinde olacaksa bu satýrlarý açabilirsiniz.
-    // x.SetKebabCaseEndpointNameFormatter(); // Kuyruk isimlerini kebab-case formatýnda oluþturur (örn: feedback-received)
-    // x.AddConsumers(Assembly.GetExecutingAssembly()); // Bu assembly'deki consumer'larý tarar
-
     x.UsingRabbitMq((context, cfg) =>
     {
-        // RabbitMQ baðlantý bilgilerini appsettings.json'dan alalým
         var rabbitMqConfig = builder.Configuration.GetSection("RabbitMq");
-        var host = rabbitMqConfig["Host"] ?? "localhost"; // Varsayýlan olarak localhost
-        var virtualHost = rabbitMqConfig["VirtualHost"] ?? "/"; // Varsayýlan olarak kök virtual host
-        var username = rabbitMqConfig["Username"] ?? "guest"; // Varsayýlan kullanýcý
-        var password = rabbitMqConfig["Password"] ?? "guest"; // Varsayýlan þifre
+        var host = rabbitMqConfig["Host"] ?? "localhost"; // default bilgiler """
+        var virtualHost = rabbitMqConfig["VirtualHost"] ?? "/"; 
+        var username = rabbitMqConfig["Username"] ?? "guest";
+        var password = rabbitMqConfig["Password"] ?? "guest";
 
         cfg.Host(host, virtualHost, h =>
         {
             h.Username(username);
             h.Password(password);
         });
-
-        // Consumer'larýnýz farklý bir projede ise veya endpoint'leri manuel konfigüre etmek isterseniz:
-        // cfg.ConfigureEndpoints(context);
     });
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyReactApp", 
+        policyBuilder =>
+        {
+            policyBuilder.WithOrigins("http://localhost:5173") // feedback-frontend
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+        });
 });
 
 // Add services to the container.
@@ -46,6 +49,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowMyReactApp"); // konum önemli, auth öncesi cors kontrolü var.
 
 app.UseAuthorization();
 
