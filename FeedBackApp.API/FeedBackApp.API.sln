@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackApp.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackApp.WorkerService", "FeedbackApp.WorkerService\FeedbackApp.WorkerService.csproj", "{22F25FF4-C3EE-457C-BF7C-17B864CDB5FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackApp.Api.Tests", "FeedbackApp.Api.Tests\FeedbackApp.Api.Tests.csproj", "{940807D0-0056-4DF3-9CC9-0556AC46FF66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackApp.WorkerService.Tests", "FeedbackApp.WorkerService.Tests\FeedbackApp.WorkerService.Tests.csproj", "{18EBE45D-5A8F-41C8-B8B2-9A5B81FDC2B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{22F25FF4-C3EE-457C-BF7C-17B864CDB5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F25FF4-C3EE-457C-BF7C-17B864CDB5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F25FF4-C3EE-457C-BF7C-17B864CDB5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{940807D0-0056-4DF3-9CC9-0556AC46FF66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{940807D0-0056-4DF3-9CC9-0556AC46FF66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{940807D0-0056-4DF3-9CC9-0556AC46FF66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{940807D0-0056-4DF3-9CC9-0556AC46FF66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18EBE45D-5A8F-41C8-B8B2-9A5B81FDC2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18EBE45D-5A8F-41C8-B8B2-9A5B81FDC2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18EBE45D-5A8F-41C8-B8B2-9A5B81FDC2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18EBE45D-5A8F-41C8-B8B2-9A5B81FDC2B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -40,10 +40,17 @@ namespace FeedBackApp.API.Controllers
                 Timestamp = DateTime.UtcNow
             };
 
+            await _publishEndpoint.Publish(feedbackMessage);
+            _logger.LogInformation("Geri bildirim mesajı RabbitMQ'ya başarıyla yayınlandı: {@FeedbackMessage}", feedbackMessage);
+
+            return Ok(new { message = "Geri bildiriminiz başarıyla alındı ve işlenmek üzere sıraya eklendi." });
+
 
             // rabbitmq bağlantı kontrolünü manuel yapmıyorum.
             // masstransit bu görevi üstleniyor, ben fırlatılan exleri yakalıyorum.
-            // TODO: Middleweare çalışması
+
+
+            /* //// TODO: Middleweare çalışması
             try
             {
                 await _publishEndpoint.Publish(feedbackMessage);
@@ -66,6 +73,8 @@ namespace FeedBackApp.API.Controllers
                 _logger.LogError(ex, "Geri bildirim mesajı RabbitMQ'ya yayınlanırken bir hata oluştu: {@FeedbackMessage}", feedbackMessage);
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Geri bildiriminiz işlenirken bir sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin." });
             }
+
+            */
         }
     }
 }

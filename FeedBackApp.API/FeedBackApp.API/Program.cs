@@ -1,5 +1,6 @@
 using MassTransit;
 using System.Reflection;
+using FeedbackApp.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +52,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowMyReactApp"); // konum önemli, auth öncesi cors kontrolü var.
+
+app.UseGlobalErrorHandling(); // ilk cors elemesi sonra error handling -sanýrým mantýklý olan bu-
 
 app.UseAuthorization();
 
